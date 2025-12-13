@@ -6,7 +6,7 @@ metadata:
   labels:
     purpose: toleration-demo
     project: roboshop 
-spec: 
+spec:
   replicas: 3
   selector:
   # these are used to select pods
@@ -20,6 +20,15 @@ spec:
         purpose: toleration-demo
         project: roboshop
     spec:
+      nodeSelector: # select node
+         kubernetes.io/hostname: ip-192-168-17-108.ec2.internal 
       containers:
       - name: nginx
         image: nginx:latest
+      tolerations: # if you taint the node key, value, effrct give it here 
+      - key : "project"
+        operator: "Equal"
+        value: "roboshop"
+        effect: "NoSchedule"
+
+    # 
