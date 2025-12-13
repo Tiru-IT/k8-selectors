@@ -1,0 +1,25 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: taints-toleration
+  # these are replica set labels
+  labels:
+    purpose: toleration-demo
+    project: roboshop 
+spec: 
+  replicas: 3
+  selector:
+  # these are used to select pods
+    matchLabels:
+      purpose: toleration-demo
+      project: roboshop
+  # pod definition
+  template:
+    metadata:
+      labels:
+        purpose: toleration-demo
+        project: roboshop
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
