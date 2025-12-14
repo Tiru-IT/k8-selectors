@@ -8,13 +8,34 @@ metadata:
 spec:
   affinity:
     nodeAffinity:
+    # hard rule
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
           - key: project
             operator: In
             values:
-            - aws  
+            - aws
+          # - key: project
+          #   operator: In 
+          #   values: 
+          #   - roboshop
+    # soft rule
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100 # first proyarity
+          preference:
+            matchExpressions:
+            - key: project
+              operator: In
+              values:
+              - roboshop   
+        - weight: 10 # second proyarity
+          preference:
+            matchExpressions:
+            - key: project
+              operator: In
+              values:
+              - aws     
   containers: 
   - name: nginx 
     image: nginx
