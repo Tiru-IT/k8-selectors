@@ -14,7 +14,7 @@ spec:
           - key: project
             operator: In
             values:
-            - roboshop   
+            - aws  
   containers: 
   - name: nginx 
     image: nginx
